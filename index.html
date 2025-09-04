@@ -1,98 +1,149 @@
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MARTA vEGA — Musician // Cyberfeminist Links</title>
-  <meta name="description" content="Marta Vega — musician, artist, cyberfeminist glitch poetics, sound + performance" />
+  <title>MARTA vEGA — Musician // Cyberfeminist Portal</title>
+  <meta name="description" content="Marta Vega — musician, artist. welcome to my saturated, distorted feelings." />
+  <style>
+    :root{
+      --mv-fg:#ff00f2; --mv-cyan:#00ffff; --mv-green:#00ff88; --mv-error:#ff0033;
+      --text:#e6fff6; --bg:#000;
+    }
+    html,body{background:var(--bg); color:var(--text); margin:0; font-family:"Courier New", ui-monospace, Menlo, Consolas, monospace;}
+    .container{max-width:1000px; margin:0 auto; padding:16px;}
+
+    /* HEADER */
+    .mv-header{color:var(--mv-fg); border:2px solid var(--mv-fg); box-shadow:0 0 24px var(--mv-fg), inset 0 0 24px #220022; padding:1.1rem 1rem 1rem; margin:0 0 1.5rem 0; position:relative; overflow:hidden;}
+    .mv-strip{position:absolute; left:-2px; top:-2px; right:-2px; background:var(--mv-error); color:#000; font-weight:700; padding:.45rem .75rem; text-transform:uppercase; letter-spacing:.12em; border-bottom:2px solid var(--mv-fg);}
+    .mv-title{margin:2.2rem 0 .35rem; font-size:clamp(1.6rem,6vw,2.4rem); line-height:1; text-transform:uppercase; letter-spacing:.18em; color:var(--mv-cyan); position:relative; display:inline-block; text-shadow:0 0 8px var(--mv-cyan);}
+    .mv-title::before,.mv-title::after{content:attr(data-text); position:absolute; inset:0; pointer-events:none;}
+    .mv-title::before{color:var(--mv-fg); transform:translate(-2px,-1px); clip-path:inset(0 0 55% 0); animation:mv-g1 .9s steps(2,end) infinite;}
+    .mv-title::after{color:var(--mv-green); transform:translate(2px,1px); clip-path:inset(45% 0 0 0); animation:mv-g2 .9s steps(2,end) infinite;}
+    @keyframes mv-g1{0%{transform:translate(-2px,-1px)}50%{transform:translate(-5px,1px)}100%{transform:translate(-2px,-1px)}}
+    @keyframes mv-g2{0%{transform:translate(2px,1px)}50%{transform:translate(4px,-2px)}100%{transform:translate(2px,1px)}}
+    .mv-sub{color:var(--mv-green); font-size:1rem; letter-spacing:.08em; margin:0 0 .75rem; opacity:.95; font-weight:bold;}
+    .mv-ascii{white-space:pre; font-size:.9rem; line-height:1.2; color:var(--mv-cyan); text-shadow:0 0 6px var(--mv-cyan); margin:.5rem 0 0;}
+    .mv-blink{animation:mv-blink 1s steps(1,end) infinite}@keyframes mv-blink{50%{opacity:0}}
+
+    /* GLITCH LOGO */
+    .logo-wrap{display:flex; justify-content:center; margin:1rem 0 1.25rem;}
+    .logo{width:min(620px,90vw); position:relative; filter:contrast(120%) saturate(120%);}
+    .logo::before,.logo::after{content:""; position:absolute; inset:0; background: url('images/logo.png') center/contain no-repeat; mix-blend-mode:screen; opacity:.9; animation:logoGlitch .9s steps(2,end) infinite; }
+    .logo::before{transform:translate(-2px,-1px); filter:hue-rotate(300deg); clip-path:inset(0 0 56% 0);}
+    .logo::after{transform:translate(2px,1px); filter:hue-rotate(120deg); clip-path:inset(44% 0 0 0);}
+    .logo img{width:100%; display:block; animation:logoFloat 4s ease-in-out infinite; }
+    @keyframes logoFloat{0%{transform:translateY(0) rotate(-.3deg)}50%{transform:translateY(-6px) rotate(.3deg)}100%{transform:translateY(0) rotate(-.3deg)}}
+    @keyframes logoGlitch{0%{transform:translate(0,0)}50%{transform:translate(3px,-2px)}100%{transform:translate(0,0)}}
+
+    /* SECTIONS */
+    section{margin:2.2rem 0;}
+    h2{font-size:1.1rem; letter-spacing:.12em; text-transform:uppercase; color:var(--mv-cyan); margin:.25rem 0 1rem;}
+
+    /* GALLERY */
+    .gallery{display:grid; gap:10px; grid-template-columns:repeat(auto-fill,minmax(220px,1fr));}
+    .card{border:1px solid var(--mv-fg); background:rgba(255,0,255,.06); padding:6px; box-shadow:0 0 12px #1a001a;}
+    .card img{width:100%; height:240px; object-fit:cover; display:block; filter:contrast(120%) saturate(120%);}
+    .caption{font-size:.85rem; color:var(--mv-green); margin-top:6px;}
+
+    /* VIDEO */
+    .video{position:relative; width:100%; max-width:860px; margin:0 auto; aspect-ratio:16/9; border:1px solid var(--mv-cyan); box-shadow:0 0 12px #003333;}
+    .video iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+
+    /* SHOW LIST */
+    .shows ul{list-style:none; padding-left:0;}
+    .shows li{margin:.5rem 0;}
+    .shows a{color:var(--mv-cyan); text-decoration:none; border-bottom:1px dashed var(--mv-cyan);}
+    .shows a:hover{color:#000; background:var(--mv-cyan);}
+
+    /* LINKS AT END */
+    nav.links{display:grid; gap:.75rem; justify-content:center; margin:2.5rem 0 2rem;}
+    nav.links a{display:block; padding:.8rem 1rem; color:var(--mv-cyan); text-decoration:none; font-weight:700; border:1px solid var(--mv-cyan); min-width:220px; text-align:center; text-transform:uppercase; position:relative; letter-spacing:.1em;}
+    nav.links a:hover{background:var(--mv-cyan); color:#000;}
+    nav.links a:hover::before, nav.links a:hover::after{content:attr(data-text); position:absolute; inset:0; pointer-events:none;}
+    nav.links a:hover::before{color:var(--mv-fg); transform:translate(-2px,-1px);}
+    nav.links a:hover::after{color:var(--mv-green); transform:translate(2px,1px);}
+
+    footer{margin:3rem 0 2rem; font-size:.85rem; color:#a0ffd9; text-align:center;}
+  </style>
 </head>
-<body style="background:#000; margin:0; font-family:'Courier New', monospace;">
+<body>
+  <div class="container">
 
-<!-- ▼ HEADER ▼ -->
-<style>
-  :root{
-    --mv-fg:#ff00f2;
-    --mv-cyan:#00ffff;
-    --mv-green:#00ff88;
-    --mv-error:#ff0033;
-  }
-  .mv-header{
-    background:#000; color:var(--mv-fg);
-    border:2px solid var(--mv-fg);
-    box-shadow:0 0 24px var(--mv-fg), inset 0 0 24px #220022;
-    padding:1.25rem 1rem 1rem; margin:0 0 2rem 0; position:relative;
-  }
-  .mv-strip{
-    position:absolute; left:-2px; top:-2px; right:-2px;
-    background:var(--mv-error); color:#000; font-weight:700;
-    padding:.45rem .75rem; text-transform:uppercase; letter-spacing:.12em;
-    border-bottom:2px solid var(--mv-fg);
-  }
-  .mv-title{
-    margin:2.2rem 0 .35rem; font-size:clamp(1.6rem,6vw,2.4rem);
-    line-height:1; text-transform:uppercase; letter-spacing:.18em;
-    color:var(--mv-cyan); position:relative; display:inline-block;
-    text-shadow:0 0 8px var(--mv-cyan);
-  }
-  .mv-title::before, .mv-title::after{
-    content:attr(data-text); position:absolute; inset:0; pointer-events:none;
-  }
-  .mv-title::before{ color:var(--mv-fg); transform:translate(-2px,-1px); clip-path:inset(0 0 55% 0); animation:mv-g1 .9s steps(2,end) infinite; }
-  .mv-title::after { color:var(--mv-green); transform:translate(2px,1px);    clip-path:inset(45% 0 0 0);  animation:mv-g2 .9s steps(2,end) infinite; }
-  @keyframes mv-g1{ 0%{transform:translate(-2px,-1px)} 50%{transform:translate(-5px,1px)} 100%{transform:translate(-2px,-1px)} }
-  @keyframes mv-g2{ 0%{transform:translate(2px,1px)}   50%{transform:translate(4px,-2px)}  100%{transform:translate(2px,1px)} }
+    <!-- HEADER -->
+    <header class="mv-header" role="banner">
+      <div class="mv-strip">SYSTEM ERROR // CYBERFEMINIST MANIFESTO DETECTED</div>
+      <h1 class="mv-title" data-text="MARTA vEGA">MARTA vEGA</h1>
+      <p class="mv-sub">MUSICIAN • artist • sound + performance • bio: welcome to my saturated, distorted feelings <span class="mv-blink">█</span></p>
+      <div class="logo-wrap">
+        <div class="logo">
+          <img src="images/logo.png" alt="MARTA vEGA logo" />
+        </div>
+      </div>
+    </header>
 
-  .mv-sub{
-    color:var(--mv-green); font-size:1rem; letter-spacing:.08em;
-    margin:0 0 .75rem; opacity:.95; font-weight:bold;
-  }
-  .mv-ascii{
-    white-space:pre; font-size:.9rem; line-height:1.2; color:var(--mv-cyan);
-    text-shadow:0 0 6px var(--mv-cyan); margin:.5rem 0 0;
-  }
-  .mv-blink{ animation:mv-blink 1s steps(1,end) infinite }
-  @keyframes mv-blink{ 50%{opacity:0} }
+    <!-- PHOTOS -->
+    <section id="photos">
+      <h2>Photos</h2>
+      <div class="gallery">
+        <figure class="card">
+          <img src="images/marta-portrait-1.jpg" alt="Marta Vega portrait" />
+          <figcaption class="caption">Portrait // saturated & distorted</figcaption>
+        </figure>
+        <figure class="card">
+          <img src="images/marta-guitar-sky.jpg" alt="Marta Vega guitar sky" />
+          <figcaption class="caption">Guitar // prism sky</figcaption>
+        </figure>
+        <figure class="card">
+          <img src="images/marta-halo.jpg" alt="Marta Vega halo" />
+          <figcaption class="caption">Halo // neon loop</figcaption>
+        </figure>
+        <figure class="card">
+          <img src="images/marta-red-room.jpg" alt="Marta Vega red room" />
+          <figcaption class="caption">Red Room // fisheye</figcaption>
+        </figure>
+        <figure class="card">
+          <img src="images/marta-oil-face.png" alt="Marta Vega oil face" />
+          <figcaption class="caption">Oil // dark gloss</figcaption>
+        </figure>
+      </div>
+    </section>
 
-  /* link styles */
-  a{
-    display:block; margin:1rem auto; padding:.8rem 1rem;
-    color:var(--mv-cyan); text-decoration:none; font-weight:700;
-    border:1px solid var(--mv-cyan);
-    width:max-content; min-width:200px;
-    text-align:center; text-transform:uppercase;
-    position:relative; letter-spacing:.1em;
-  }
-  a:hover{ background:var(--mv-cyan); color:#000; }
-  a:hover::before, a:hover::after{
-    content:attr(data-text); position:absolute; inset:0; pointer-events:none;
-  }
-  a:hover::before{ color:var(--mv-fg); transform:translate(-2px,-1px); }
-  a:hover::after { color:var(--mv-green); transform:translate(2px,1px); }
-</style>
+    <!-- MUSIC VIDEO -->
+    <section id="video">
+      <h2>Music Video</h2>
+      <div class="video">
+        <iframe
+          src="https://www.youtube.com/embed/CtoSWjgRucw"
+          title="Marta Vega — Music Video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
 
-<header class="mv-header" role="banner">
-  <div class="mv-strip">SYSTEM ERROR // CYBERFEMINIST MANIFESTO DETECTED</div>
-  <h1 class="mv-title" data-text="MARTA vEGA">MARTA vEGA</h1>
-  <p class="mv-sub">MUSICIAN • artist • cyberfeminism • glitch poetics • sound + performance <span class="mv-blink">█</span></p>
-  <pre class="mv-ascii">
-+--------------------------------------------------------------+
-|  node: MARTA VEGA  ::  MUSICIAN + CYBERFEMINIST GLITCH MAKER |
-|  manifesto:// bodies, circuits, desire                       |
-+--------------------------------------------------------------+
-  </pre>
-</header>
-<!-- ▲ HEADER ▲ -->
+    <!-- SHOWS -->
+    <section id="shows" class="shows">
+      <h2>Upcoming Shows</h2>
+      <ul>
+        <li><a href="https://www.bandsintown.com/e/107300665?app_id=szm_feed&came_from=283&utm_medium=web&utm_source=szm_feed&utm_campaign=event" target="_blank" rel="noopener">Thu Oct 2, 2025 — Reading — Purple Turtle</a></li>
+        <li><a href="https://www.bandsintown.com/e/107300702?came_from=297&utm_medium=web&utm_source=facebook&utm_campaign=event_social_share" target="_blank" rel="noopener">Sun Oct 26, 2025 — London — LVLS (HallowScreamFest! Day 3)</a></li>
+        <li><a href="https://hotvox.co.uk/venue/93-feet-east/" target="_blank" rel="noopener">Fri Nov 14, 2025 — London — 93 Feet East</a></li>
+      </ul>
+      <p class="caption">See all dates on <a href="https://www.bandsintown.com/a/15610340-marta-vega" target="_blank" rel="noopener">Bandsintown</a>.</p>
+    </section>
 
+    <!-- LINKS AT END -->
+    <nav class="links" aria-label="Links">
+      <a href="https://www.instagram.com/martavega.xx/" data-text="Instagram" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/martavega.xx" data-text="Facebook" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.youtube.com/channel/UC1SN8LmTb6liQTtY2dvYPGA" data-text="YouTube" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://open.spotify.com/artist/7KtHuw3e8j6LnA4PIHyhAr?autoplay=true" data-text="Spotify" target="_blank" rel="noopener">Spotify</a>
+      <a href="https://www.tiktok.com/@martavega.xx" data-text="TikTok" target="_blank" rel="noopener">TikTok</a>
+    </nav>
 
-<!-- ▼ LINKS ▼ -->
-<main style="text-align:center;">
-  <a href="https://www.instagram.com/martavega.xx/" data-text="Instagram" target="_blank">Instagram</a>
-  <a href="https://www.facebook.com/martavega.xx" data-text="Facebook" target="_blank">Facebook</a>
-  <a href="https://www.youtube.com/channel/UC1SN8LmTb6liQTtY2dvYPGA" data-text="YouTube" target="_blank">YouTube</a>
-  <a href="https://open.spotify.com/artist/7KtHuw3e8j6LnA4PIHyhAr?autoplay=true" data-text="Spotify" target="_blank">Spotify</a>
-  <a href="https://www.tiktok.com/@martavega.xx" data-text="TikTok" target="_blank">TikTok</a>
-</main>
-<!-- ▲ LINKS ▲ -->
-
+    <footer>© 2025 Marta Vega</footer>
+  </div>
 </body>
 </html>
