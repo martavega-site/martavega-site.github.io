@@ -3,13 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MARTA vEGA — Musician // Cyberfeminist Portal</title>
+  <title>MARTA vEGA — Musician // Performer Portal</title>
   <meta name="description" content="Marta Vega — musician, artist. welcome to my saturated, distorted feelings." />
   <style>
     :root{
       --mv-fg:#ff00f2; --mv-cyan:#00ffff; --mv-green:#00ff88; --mv-error:#ff0033;
       --text:#e6fff6; --bg:#000;
-      --logo-url: url('https://images.squarespace-cdn.com/content/v1/56e6c21027d4bdfdac8a607c/1699348958485-A7U8IMPVWU112CSQ4YHL/Untitled-1.jpg?format=1000w');
+      /* your three glitch layers */
+      --logo-url-1: url('https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQp07GsgP5C7tjlbW1ovhxi7PqTZAG2QN1GTBUqAyfM9wUepC_-cuciCVhjmf-za6KIiQZANdvGZuEd-qOnzEwxchygm5Pf21RpV-CSHMgq8A');
+      --logo-url-2: url('https://images.squarespace-cdn.com/content/v1/56e6c21027d4bdfdac8a607c/1699348958485-A7U8IMPVWU112CSQ4YHL/Untitled-1.jpg?format=1000w');
+      --logo-url-3: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMSEhUTExMWFhUXGBoaGBgYGRgbGxobHSAaFxoaGRgZHyggGh0lHh0aITEhJSkrLi4uGR8zODMtNygtLisBCgoKDg0OGxAQGy0jICYtLS01LS01NS0tNS0tLS0tNS0tLS0tLS0tLS0tLy8tLS0tLS0tLS0tLS0tLS0tLS0tLf...');
     }
     html,body{background:var(--bg); color:var(--text); margin:0; font-family:"Courier New", ui-monospace, Menlo, Consolas, monospace;}
     .container{max-width:1000px; margin:0 auto; padding:16px;}
@@ -25,212 +28,145 @@
     @keyframes mv-g2{0%{transform:translate(2px,1px)}50%{transform:translate(4px,-2px)}100%{transform:translate(2px,1px)}}
     .mv-sub{color:var(--mv-green); font-size:1rem; letter-spacing:.08em; margin:0 0 .75rem; opacity:.95; font-weight:bold;}
 
- /* === ASCII block — neon scanlines + flicker === */
-:root {
-  /* your three logo layers (you can change later) */
-  --logo-url-1: url('https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQp07GsgP5C7tjlbW1ovhxi7PqTZAG2QN1GTBUqAyfM9wUepC_-cuciCVhjmf-za6KIiQZANdvGZuEd-qOnzEwxchygm5Pf21RpV-CSHMgq8A');
-  --logo-url-2: url('https://images.squarespace-cdn.com/content/v1/56e6c21027d4bdfdac8a607c/1699348958485-A7U8IMPVWU112CSQ4YHL/Untitled-1.jpg?format=1000w');
-  --logo-url-3: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMSEhUTExMWFhUXGBoaGBgYGRgbGxobHSAaFxoaGRgZHyggGh0lHh0aITEhJSkrLi4uGR8zODMtNygtLisBCgoKDg0OGxAQGy0jICYtLS01LS01NS0tNS0tLS0tNS0tLS0tLS0tLS0tLy8tLS0tLS0tLS0tLS0tLS0tLS0tLf...'); /* truncated is fine */
-}
-
-.mv-ascii{
-  position: relative;
-  white-space: pre;
-  font-size: .95rem;
-  line-height: 1.25;
-  color: var(--mv-cyan);
-  margin:.6rem 0 0;
-  text-shadow:
-    0 0 6px var(--mv-cyan),
-    0 0 14px rgba(0,255,255,.6),
-    0 0 28px rgba(0,255,255,.3);
-  filter: drop-shadow(0 0 6px rgba(0,255,255,.35));
-  animation: mv-ascii-flicker 2.2s infinite steps(2,end);
-}
-.mv-ascii::after{
-  content:"";
-  position:absolute; inset:0;
-  pointer-events:none;
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      rgba(0,255,255,.08) 0 2px,
-      transparent 2px 4px
-    );
-  mix-blend-mode: screen;
-  animation: mv-scan 6s linear infinite;
-}
-.mv-blink{ animation: mv-blink 1s steps(1,end) infinite }
-@keyframes mv-blink{ 50%{ opacity:0 } }
-@keyframes mv-ascii-flicker{
-  0%,100%{ opacity:.98; }
-  10%{ opacity:.90; }
-  11%{ opacity:.60; }
-  12%{ opacity:.98; }
-  55%{ opacity:.94; }
-  56%{ opacity:.70; }
-  57%{ opacity:.98; }
-}
-@keyframes mv-scan{
-  0%{ opacity:.25; transform: translateY(-2%); }
-  50%{ opacity:.45; transform: translateY(2%); }
-  100%{ opacity:.25; transform: translateY(-2%); }
-}
-
-/* === GLITCH LOGO — three layers from your links (no HTML change needed) === */
-.logo-wrap{ display:flex; justify-content:center; margin:1rem 0 1.25rem; }
-.logo{
-  width:min(640px,90vw);
-  height:auto;
-  aspect-ratio: 16/9;
-  position:relative;
-  background: var(--logo-url-1) center/contain no-repeat; /* base: FIRST image */
-  filter: contrast(115%) saturate(115%);
-  animation: logoFloat 4s ease-in-out infinite;
-}
-/* hide the original <img> so CSS layers take over */
-.logo img{ display:none !important; }
-
-/* layer 2 (Squarespace image) */
-.logo::before,
-.logo::after{
-  content:""; position:absolute; inset:0; pointer-events:none;
-  background: center/contain no-repeat;
-  mix-blend-mode: screen; opacity:.95;
-  animation: logoGlitch .9s steps(2,end) infinite;
-}
-.logo::before{
-  background-image: var(--logo-url-2);          /* SECOND image */
-  transform: translate(-2px,-1px);
-  filter: hue-rotate(300deg);
-  clip-path: inset(0 0 56% 0);
-}
-.logo::after{
-  background-image: var(--logo-url-3);          /* THIRD (base64) image */
-  transform: translate(2px,1px);
-  filter: hue-rotate(120deg);
-  clip-path: inset(44% 0 0 0);
-}
-
-@keyframes logoFloat{
-  0%{ transform: translateY(0) rotate(-.3deg) }
-  50%{ transform: translateY(-6px) rotate(.3deg) }
-  100%{ transform: translateY(0) rotate(-.3deg) }
-}
-@keyframes logoGlitch{
-  0%{ transform: translate(0,0) }
-  45%{ transform: translate(3px,-2px) }
-  46%{ filter: hue-rotate(120deg) saturate(150%); }
-  55%{ transform: translate(-3px,2px) }
-  100%{ transform: translate(0,0) }
-}
-
-/* === sections / h2 — subtle neon underline === */
-section{ margin:2.2rem 0; }
-h2{
-  font-size:1.1rem; letter-spacing:.12em; text-transform:uppercase;
-  color:var(--mv-cyan); margin:.25rem 0 1rem;
-  position: relative; padding-bottom:.35rem;
-  text-shadow: 0 0 10px rgba(0,255,255,.5);
-}
-h2::after{
-  content:""; position:absolute; left:0; right:0; bottom:0;
-  height:2px; background:
-    linear-gradient(90deg, transparent, var(--mv-cyan), transparent);
-  box-shadow: 0 0 14px var(--mv-cyan);
-  opacity:.85;
-}
-
-/* === gallery — brighter neon frame === */
-.gallery{
-  display:grid; gap:10px;
-  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-}
-.card{
-  border:1px solid var(--mv-fg);
-  background: radial-gradient(120% 120% at 0% 0%, rgba(255,0,255,.09), rgba(255,0,255,.03));
-  padding:6px;
-  box-shadow:
-    0 0 10px rgba(255,0,255,.25),
-    inset 0 0 10px rgba(255,0,255,.15);
-}
-.card img{
-  width:100%; height:240px; object-fit:cover; display:block;
-  filter: contrast(120%) saturate(120%);
-  box-shadow: 0 0 10px rgba(0,255,255,.15);
-}
-.caption{ font-size:.85rem; color:var(--mv-green); margin-top:6px; }
-
-
-    /* GLITCH LOGO */
-    .logo-wrap{display:flex; justify-content:center; margin:1rem 0 1.25rem;}
-    .logo{width:min(640px,90vw); position:relative;}
-    .logo::before,.logo::after{
-      content:""; position:absolute; inset:0;
-      background: var(--logo-url) center/contain no-repeat;
-      mix-blend-mode:screen; opacity:.9; animation:logoGlitch .9s steps(2,end) infinite;
+    /* === ASCII block — neon scanlines + flicker === */
+    .mv-ascii{
+      position: relative;
+      white-space: pre;
+      font-size: .95rem;
+      line-height: 1.25;
+      color: var(--mv-cyan);
+      margin:.6rem 0 0;
+      text-shadow:
+        0 0 6px var(--mv-cyan),
+        0 0 14px rgba(0,255,255,.6),
+        0 0 28px rgba(0,255,255,.3);
+      filter: drop-shadow(0 0 6px rgba(0,255,255,.35));
+      animation: mv-ascii-flicker 2.2s infinite steps(2,end);
     }
-    .logo::before{transform:translate(-2px,-1px); filter:hue-rotate(300deg); clip-path:inset(0 0 56% 0);}
-    .logo::after{transform:translate(2px,1px); filter:hue-rotate(120deg); clip-path:inset(44% 0 0 0);}
-    .logo img{width:100%; display:block; animation:logoFloat 4s ease-in-out infinite;}
-    @keyframes logoFloat{0%{transform:translateY(0) rotate(-.3deg)}50%{transform:translateY(-6px) rotate(.3deg)}100%{transform:translateY(0) rotate(-.3deg)}}
-    @keyframes logoGlitch{0%{transform:translate(0,0)}50%{transform:translate(3px,-2px)}100%{transform:translate(0,0)}}
+    .mv-ascii::after{
+      content:"";
+      position:absolute; inset:0;
+      pointer-events:none;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(0,255,255,.08) 0 2px,
+          transparent 2px 4px
+        );
+      mix-blend-mode: screen;
+      animation: mv-scan 6s linear infinite;
+    }
+    .mv-blink{ animation: mv-blink 1s steps(1,end) infinite }
+    @keyframes mv-blink{ 50%{ opacity:0 } }
+    @keyframes mv-ascii-flicker{
+      0%,100%{ opacity:.98; }
+      10%{ opacity:.90; }
+      11%{ opacity:.60; }
+      12%{ opacity:.98; }
+      55%{ opacity:.94; }
+      56%{ opacity:.70; }
+      57%{ opacity:.98; }
+    }
+    @keyframes mv-scan{
+      0%{ opacity:.25; transform: translateY(-2%); }
+      50%{ opacity:.45; transform: translateY(2%); }
+      100%{ opacity:.25; transform: translateY(-2%); }
+    }
 
-    /* sections */
+    /* === GLITCH LOGO — three layers from your links === */
+    .logo-wrap{ display:flex; justify-content:center; margin:1rem 0 2.5rem; }
+    .logo{
+      width:min(640px,90vw);
+      aspect-ratio: 16/9;
+      position:relative;
+      background: var(--logo-url-1) center/contain no-repeat; /* base: FIRST image */
+      filter: contrast(115%) saturate(115%);
+      animation: logoFloat 4s ease-in-out infinite;
+    }
+    /* hide any inline <img> so you don’t get two logos */
+    .logo img{ display:none !important; }
+
+    /* layer 2 (Squarespace) + layer 3 (base64) */
+    .logo::before,
+    .logo::after{
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background: center/contain no-repeat;
+      mix-blend-mode: screen; opacity:.95;
+      animation: logoGlitch .9s steps(2,end) infinite;
+    }
+    .logo::before{
+      background-image: var(--logo-url-2);          /* SECOND image */
+      transform: translate(-2px,-1px);
+      filter: hue-rotate(300deg);
+      clip-path: inset(0 0 56% 0);
+    }
+    .logo::after{
+      background-image: var(--logo-url-3);          /* THIRD (base64) */
+      transform: translate(2px,1px);
+      filter: hue-rotate(120deg);
+      clip-path: inset(44% 0 0 0);
+    }
+
+    @keyframes logoFloat{
+      0%{ transform: translateY(0) rotate(-.3deg) }
+      50%{ transform: translateY(-6px) rotate(.3deg) }
+      100%{ transform: translateY(0) rotate(-.3deg) }
+    }
+    @keyframes logoGlitch{
+      0%{ transform: translate(0,0) }
+      45%{ transform: translate(3px,-2px) }
+      46%{ filter: hue-rotate(120deg) saturate(150%); }
+      55%{ transform: translate(-3px,2px) }
+      100%{ transform: translate(0,0) }
+    }
+
+    /* sections / headings */
     section{margin:2.2rem 0;}
-    h2{font-size:1.1rem; letter-spacing:.12em; text-transform:uppercase; color:var(--mv-cyan); margin:.25rem 0 1rem;}
+    h2{
+      font-size:1.1rem; letter-spacing:.12em; text-transform:uppercase; color:var(--mv-cyan); margin:.25rem 0 1rem;
+      position: relative; padding-bottom:.35rem; text-shadow:0 0 10px rgba(0,255,255,.5);
+    }
+    h2::after{
+      content:""; position:absolute; left:0; right:0; bottom:0; height:2px;
+      background:linear-gradient(90deg, transparent, var(--mv-cyan), transparent);
+      box-shadow:0 0 14px var(--mv-cyan); opacity:.85;
+    }
 
     /* gallery */
     .gallery{display:grid; gap:10px; grid-template-columns:repeat(auto-fill,minmax(220px,1fr));}
-    .card{border:1px solid var(--mv-fg); background:rgba(255,0,255,.06); padding:6px; box-shadow:0 0 12px #1a001a;}
-    .card img{width:100%; height:240px; object-fit:cover; display:block; filter:contrast(120%) saturate(120%);}
+    .card{border:1px solid var(--mv-fg); background:radial-gradient(120% 120% at 0% 0%, rgba(255,0,255,.09), rgba(255,0,255,.03)); padding:6px; box-shadow:0 0 12px #1a001a, inset 0 0 10px rgba(255,0,255,.15);}
+    .card img{width:100%; height:240px; object-fit:cover; display:block; filter:contrast(120%) saturate(120%); box-shadow:0 0 10px rgba(0,255,255,.15);}
     .caption{font-size:.85rem; color:var(--mv-green); margin-top:6px;}
-
-    /* video */
-    .video{position:relative; width:100%; max-width:860px; margin:0 auto; aspect-ratio:16/9; border:1px solid var(--mv-cyan); box-shadow:0 0 12px #003333;}
-    .video iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
-
-    /* shows */
-    .shows ul{list-style:none; padding-left:0;}
-    .shows li{margin:.5rem 0;}
-    .shows a{color:var(--mv-cyan); text-decoration:none; border-bottom:1px dashed var(--mv-cyan);}
-    .shows a:hover{color:#000; background:var(--mv-cyan);}
-
-    /* links at end */
-    nav.links{display:grid; gap:.75rem; justify-content:center; margin:2.5rem 0 2rem;}
-    nav.links a{display:block; padding:.8rem 1rem; color:var(--mv-cyan); text-decoration:none; font-weight:700; border:1px solid var(--mv-cyan); min-width:220px; text-align:center; text-transform:uppercase; position:relative; letter-spacing:.1em;}
-    nav.links a:hover{background:var(--mv-cyan); color:#000;}
-    nav.links a:hover::before, nav.links a:hover::after{content:attr(data-text); position:absolute; inset:0; pointer-events:none;}
-    nav.links a:hover::before{color:var(--mv-fg); transform:translate(-2px,-1px);}
-    nav.links a:hover::after{color:var(--mv-green); transform:translate(2px,1px);}
-
-    footer{margin:3rem 0 2rem; font-size:.85rem; color:#a0ffd9; text-align:center;}
   </style>
 </head>
 <body>
   <div class="container">
 
-    <!-- HEADER -->
     <header class="mv-header" role="banner">
       <div class="mv-strip">SYSTEM ERROR // CYBERFEMINIST MANIFESTO DETECTED</div>
       <h1 class="mv-title" data-text="MARTA vEGA">MARTA vEGA</h1>
       <p class="mv-sub">MUSICIAN • artist • sound + performance • bio: welcome to my saturated, distorted feelings <span class="mv-blink">█</span></p>
 
-      <!-- ASCII block (kept exactly) -->
-      <pre class="mv-ascii">
+<pre class="mv-ascii">
 +---------------------------------------------------------------------+
 |  node: MARTA VEGA  ::  MUSICIAN + CYBERFEMINIST GLITCH MAKER        |
 |  bio: welcome to my saturated, distorted feelings                   |
 +---------------------------------------------------------------------+
-      </pre>
+</pre>
 
-      <!-- Glitching / floating logo -->
+      <!-- Glitch logo uses your 3 images via CSS variables above -->
       <div class="logo-wrap">
-        <div class="logo">
-          <img src="https://images.squarespace-cdn.com/content/v1/56e6c21027d4bdfdac8a607c/1699348958485-A7U8IMPVWU112CSQ4YHL/Untitled-1.jpg?format=1000w" alt="MARTA vEGA logo" />
-        </div>
+        <div class="logo"></div>
       </div>
     </header>
+
+    <!-- keep the rest of your page below (photos/video/shows/links) exactly as you have it -->
+    <!-- ... -->
+
+  </div>
+</body>
+</html>
+
 
     <!-- PHOTOS (FIRST = your base64 image) -->
     <section id="photos">
