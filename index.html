@@ -23,40 +23,47 @@
     @keyframes mv-g1{0%{transform:translate(-2px,-1px)}50%{transform:translate(-5px,1px)}100%{transform:translate(-2px,-1px)}}
     @keyframes mv-g2{0%{transform:translate(2px,1px)}50%{transform:translate(4px,-2px)}100%{transform:translate(2px,1px)}}
     .mv-sub{color:var(--mv-green); font-size:1rem; letter-spacing:.08em; margin:0 0 .75rem; opacity:.95; font-weight:bold;}
-    .mv-ascii{white-space:pre; font-size:.9rem; line-height:1.2; color:var(--mv-cyan); text-shadow:0 0 6px var(--mv-cyan); margin:.5rem 0 0;}
-    .mv-blink{animation:mv-blink 1s steps(1,end) infinite}@keyframes mv-blink{50%{opacity:0}}
 
-    /* GLITCH LOGO */
+    /* ASCII block you liked */
+    .mv-ascii{white-space:pre; font-size:.9rem; line-height:1.2; color:var(--mv-cyan); text-shadow:0 0 6px var(--mv-cyan); margin:.5rem 0 0;}
+    .mv-blink{animation:mv-blink 1s steps(1,end) infinite}
+    @keyframes mv-blink{50%{opacity:0}}
+
+    /* GLITCH LOGO (uses your Squarespace image) */
     .logo-wrap{display:flex; justify-content:center; margin:1rem 0 1.25rem;}
-    .logo{width:min(620px,90vw); position:relative; filter:contrast(120%) saturate(120%);}
-    .logo::before,.logo::after{content:""; position:absolute; inset:0; background: url('images/logo.png') center/contain no-repeat; mix-blend-mode:screen; opacity:.9; animation:logoGlitch .9s steps(2,end) infinite; }
+    .logo{width:min(640px,90vw); position:relative;}
+    .logo::before,.logo::after{
+      content:""; position:absolute; inset:0;
+      background: var(--logo-url) center/contain no-repeat;
+      mix-blend-mode:screen; opacity:.9; animation:logoGlitch .9s steps(2,end) infinite;
+    }
     .logo::before{transform:translate(-2px,-1px); filter:hue-rotate(300deg); clip-path:inset(0 0 56% 0);}
     .logo::after{transform:translate(2px,1px); filter:hue-rotate(120deg); clip-path:inset(44% 0 0 0);}
-    .logo img{width:100%; display:block; animation:logoFloat 4s ease-in-out infinite; }
+    .logo img{width:100%; display:block; animation:logoFloat 4s ease-in-out infinite;}
     @keyframes logoFloat{0%{transform:translateY(0) rotate(-.3deg)}50%{transform:translateY(-6px) rotate(.3deg)}100%{transform:translateY(0) rotate(-.3deg)}}
     @keyframes logoGlitch{0%{transform:translate(0,0)}50%{transform:translate(3px,-2px)}100%{transform:translate(0,0)}}
 
-    /* SECTIONS */
+    /* sections */
     section{margin:2.2rem 0;}
     h2{font-size:1.1rem; letter-spacing:.12em; text-transform:uppercase; color:var(--mv-cyan); margin:.25rem 0 1rem;}
 
-    /* GALLERY */
+    /* gallery */
     .gallery{display:grid; gap:10px; grid-template-columns:repeat(auto-fill,minmax(220px,1fr));}
     .card{border:1px solid var(--mv-fg); background:rgba(255,0,255,.06); padding:6px; box-shadow:0 0 12px #1a001a;}
     .card img{width:100%; height:240px; object-fit:cover; display:block; filter:contrast(120%) saturate(120%);}
     .caption{font-size:.85rem; color:var(--mv-green); margin-top:6px;}
 
-    /* VIDEO */
+    /* video */
     .video{position:relative; width:100%; max-width:860px; margin:0 auto; aspect-ratio:16/9; border:1px solid var(--mv-cyan); box-shadow:0 0 12px #003333;}
     .video iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
 
-    /* SHOW LIST */
+    /* shows */
     .shows ul{list-style:none; padding-left:0;}
     .shows li{margin:.5rem 0;}
     .shows a{color:var(--mv-cyan); text-decoration:none; border-bottom:1px dashed var(--mv-cyan);}
     .shows a:hover{color:#000; background:var(--mv-cyan);}
 
-    /* LINKS AT END */
+    /* links at end */
     nav.links{display:grid; gap:.75rem; justify-content:center; margin:2.5rem 0 2rem;}
     nav.links a{display:block; padding:.8rem 1rem; color:var(--mv-cyan); text-decoration:none; font-weight:700; border:1px solid var(--mv-cyan); min-width:220px; text-align:center; text-transform:uppercase; position:relative; letter-spacing:.1em;}
     nav.links a:hover{background:var(--mv-cyan); color:#000;}
@@ -65,6 +72,13 @@
     nav.links a:hover::after{color:var(--mv-green); transform:translate(2px,1px);}
 
     footer{margin:3rem 0 2rem; font-size:.85rem; color:#a0ffd9; text-align:center;}
+  </style>
+
+  <!-- set the logo URL once so CSS can use it for the glitch layers -->
+  <style>
+    :root{
+      --logo-url: url('https://images.squarespace-cdn.com/content/v1/56e6c21027d4bdfdac8a607c/1699348958485-A7U8IMPVWU112CSQ4YHL/Untitled-1.jpg?format=1000w');
+    }
   </style>
 </head>
 <body>
@@ -75,74 +89,37 @@
       <div class="mv-strip">SYSTEM ERROR // CYBERFEMINIST MANIFESTO DETECTED</div>
       <h1 class="mv-title" data-text="MARTA vEGA">MARTA vEGA</h1>
       <p class="mv-sub">MUSICIAN • artist • sound + performance • bio: welcome to my saturated, distorted feelings <span class="mv-blink">█</span></p>
+
+      <!-- ASCII block (kept exactly) -->
+      <pre class="mv-ascii">
++---------------------------------------------------------------------+
+|  node: MARTA VEGA  ::  MUSICIAN + CYBERFEMINIST GLITCH MAKER        |
+|  bio: welcome to my saturated, distorted feelings                   |
++---------------------------------------------------------------------+
+      </pre>
+
+      <!-- Glitching / floating logo -->
       <div class="logo-wrap">
         <div class="logo">
-          <img src="images/logo.png" alt="MARTA vEGA logo" />
+          <img src="https://images.squarespace-cdn.com/content/v1/56e6c21027d4bdfdac8a607c/1699348958485-A7U8IMPVWU112CSQ4YHL/Untitled-1.jpg?format=1000w" alt="MARTA vEGA logo" />
         </div>
       </div>
     </header>
 
-    <!-- PHOTOS -->
+    <!-- PHOTOS (using your provided URLs) -->
     <section id="photos">
       <h2>Photos</h2>
       <div class="gallery">
         <figure class="card">
-          <img src="images/marta-portrait-1.jpg" alt="Marta Vega portrait" />
-          <figcaption class="caption">Portrait // saturated & distorted</figcaption>
+          <img src="https://images.squarespace-cdn.com/content/v1/56e6c21027d4bdfdac8a607c/1699348958485-A7U8IMPVWU112CSQ4YHL/Untitled-1.jpg?format=1000w" alt="Marta Vega artwork / logo" />
+          <figcaption class="caption">Logo // neon grit</figcaption>
         </figure>
-        <figure class="card">
-          <img src="images/marta-guitar-sky.jpg" alt="Marta Vega guitar sky" />
-          <figcaption class="caption">Guitar // prism sky</figcaption>
-        </figure>
-        <figure class="card">
-          <img src="images/marta-halo.jpg" alt="Marta Vega halo" />
-          <figcaption class="caption">Halo // neon loop</figcaption>
-        </figure>
-        <figure class="card">
-          <img src="images/marta-red-room.jpg" alt="Marta Vega red room" />
-          <figcaption class="caption">Red Room // fisheye</figcaption>
-        </figure>
-        <figure class="card">
-          <img src="images/marta-oil-face.png" alt="Marta Vega oil face" />
-          <figcaption class="caption">Oil // dark gloss</figcaption>
-        </figure>
-      </div>
-    </section>
 
-    <!-- MUSIC VIDEO -->
-    <section id="video">
-      <h2>Music Video</h2>
-      <div class="video">
-        <iframe
-          src="https://www.youtube.com/embed/CtoSWjgRucw"
-          title="Marta Vega — Music Video"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
-        </iframe>
-      </div>
-    </section>
+        <figure class="card">
+          <img src="https://i.scdn.co/image/ab6761610000e5ebec80b36463138757ad762472" alt="Marta Vega Spotify artist image" />
+          <figcaption class="caption">Portrait // Spotify</figcaption>
+        </figure>
 
-    <!-- SHOWS -->
-    <section id="shows" class="shows">
-      <h2>Upcoming Shows</h2>
-      <ul>
-        <li><a href="https://www.bandsintown.com/e/107300665?app_id=szm_feed&came_from=283&utm_medium=web&utm_source=szm_feed&utm_campaign=event" target="_blank" rel="noopener">Thu Oct 2, 2025 — Reading — Purple Turtle</a></li>
-        <li><a href="https://www.bandsintown.com/e/107300702?came_from=297&utm_medium=web&utm_source=facebook&utm_campaign=event_social_share" target="_blank" rel="noopener">Sun Oct 26, 2025 — London — LVLS (HallowScreamFest! Day 3)</a></li>
-        <li><a href="https://hotvox.co.uk/venue/93-feet-east/" target="_blank" rel="noopener">Fri Nov 14, 2025 — London — 93 Feet East</a></li>
-      </ul>
-      <p class="caption">See all dates on <a href="https://www.bandsintown.com/a/15610340-marta-vega" target="_blank" rel="noopener">Bandsintown</a>.</p>
-    </section>
-
-    <!-- LINKS AT END -->
-    <nav class="links" aria-label="Links">
-      <a href="https://www.instagram.com/martavega.xx/" data-text="Instagram" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://www.facebook.com/martavega.xx" data-text="Facebook" target="_blank" rel="noopener">Facebook</a>
-      <a href="https://www.youtube.com/channel/UC1SN8LmTb6liQTtY2dvYPGA" data-text="YouTube" target="_blank" rel="noopener">YouTube</a>
-      <a href="https://open.spotify.com/artist/7KtHuw3e8j6LnA4PIHyhAr?autoplay=true" data-text="Spotify" target="_blank" rel="noopener">Spotify</a>
-      <a href="https://www.tiktok.com/@martavega.xx" data-text="TikTok" target="_blank" rel="noopener">TikTok</a>
-    </nav>
-
-    <footer>© 2025 Marta Vega</footer>
-  </div>
-</body>
-</html>
+        <!-- Your base64 JPEG (you can replace with any URL later) -->
+        <figure class="card">
+          <img src="data:image/jpeg;base64,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
