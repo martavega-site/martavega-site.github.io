@@ -54,6 +54,36 @@ html, body { overflow-x: hidden; }
   max-height: 55vh;          /* never taller than ~half the screen */
   object-fit: contain;
 }
+    /* Sliding ASCII announcement */
+.mv-announce-wrap{
+  position: relative;
+  overflow: hidden;          /* hides edges while it slides */
+  margin-top:.6rem;
+  filter: drop-shadow(0 0 6px rgba(0,255,255,.35));
+}
+
+.mv-announce-track{
+  display:inline-block;
+  white-space: pre;           /* keep ASCII aligned */
+  animation: mv-announce 14s linear infinite;
+}
+
+/* pause on hover (optional) */
+.mv-announce-wrap:hover .mv-announce-track{
+  animation-play-state: paused;
+}
+
+/* respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .mv-announce-track{ animation: none; }
+}
+
+/* the slide loop: from off-screen right to off-screen left */
+@keyframes mv-announce{
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
 
 
     /* ASCII: neon scanlines + flicker */
@@ -138,12 +168,14 @@ html, body { overflow-x: hidden; }
       <h1 class="mv-title" data-text="MARTA vEGA">MARTA vEGA</h1>
       <p class="mv-sub">MUSICIAN • artist • performer <span class="mv-blink">█</span></p>
 
-<pre class="mv-ascii">
+<div class="mv-announce-wrap" aria-hidden="true">
+  <pre class="mv-ascii mv-announce-track">
 +---------------------------------------------------------------------+
 |  node: MARTA VEGA  ::  MUSICIAN + CYBER GRIT MAKER                  |
 |  bio: welcome to my saturated, distorted feelings                   |
 +---------------------------------------------------------------------+
-</pre>
+  </pre>
+</div>
 
       <!-- Single image only (your base64) -->
       <div class="logo-wrap">
