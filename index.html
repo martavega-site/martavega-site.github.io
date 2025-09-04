@@ -12,6 +12,7 @@
     }
     html,body{background:var(--bg); color:var(--text); margin:0; font-family:"Courier New", ui-monospace, Menlo, Consolas, monospace;}
     .container{max-width:1000px; margin:0 auto; padding:16px;}
+    
 
     /* HEADER */
     .mv-header{color:var(--mv-fg); border:2px solid var(--mv-fg); box-shadow:0 0 24px var(--mv-fg), inset 0 0 24px #220022; padding:1.1rem 1rem 1rem; margin:0 0 1.5rem 0; position:relative; overflow:hidden;}
@@ -23,70 +24,42 @@
     @keyframes mv-g1{0%{transform:translate(-2px,-1px)}50%{transform:translate(-5px,1px)}100%{transform:translate(-2px,-1px)}}
     @keyframes mv-g2{0%{transform:translate(2px,1px)}50%{transform:translate(4px,-2px)}100%{transform:translate(2px,1px)}}
     .mv-sub{color:var(--mv-green); font-size:1rem; letter-spacing:.08em; margin:0 0 .75rem; opacity:.95; font-weight:bold;}
+    /* Sliding ASCII announcement */ 
+    .mv-announce-wrap{
+      position: relative;
+      width: 100%;
+      overflow: hidden;         /* hide edges while it slides */
+      margin-top:.6rem; 
+      filter: drop-shadow(0 0 6px rgba(0,255,255,.35));
+    } 
 
-    /* --- Mobile polish & overflow fixes --- */
-html, body { overflow-x: hidden; }
+    .mv-announce-track{
+      display:inline-block;     /* lets it slide as one piece */
+      white-space:pre;          /* keep ASCII aligned */
+      will-change: transform;
+      animation: mv-announce 18s linear infinite;
+    }
 
-/* Respect iOS safe areas + tighter padding on small screens */
-.container{
-  padding-left: max(12px, env(safe-area-inset-left));
-  padding-right: max(12px, env(safe-area-inset-right));
-  padding-top: max(16px, env(safe-area-inset-top));
-  padding-bottom: max(16px, env(safe-area-inset-bottom));
-}
-
-/* Make the red strip wrap instead of overflowing */
-.mv-strip{
-  white-space: normal;
-  word-break: break-word;
-  line-height: 1.1;
-}
-
-/* Keep ASCII from being cut off: allow swipe-to-scroll horizontally */
-.mv-ascii{
-  white-space: pre;          /* preserve alignment */
-  overflow-x: auto;          /* swipe if it's wider than screen */
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Keep hero image from eating the whole viewport on tiny phones */
-.logo img{
-  max-height: 55vh;          /* never taller than ~half the screen */
-  object-fit: contain;
-}
-    /* Sliding ASCII announcement */
-.mv-announce-wrap{
-  position: relative;
-  overflow: hidden;          /* hides edges while it slides */
-  margin-top:.6rem;
-  filter: drop-shadow(0 0 6px rgba(0,255,255,.35));
-}
-
-.mv-announce-track{
-  display:inline-block;
-  white-space: pre;           /* keep ASCII aligned */
-  animation: mv-announce 14s linear infinite;
-}
-
-/* pause on hover (optional) */
-.mv-announce-wrap:hover .mv-announce-track{
-  animation-play-state: paused;
-}
-
-/* respect users who prefer reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .mv-announce-track{ animation: none; }
-}
-
-/* the slide loop: from off-screen right to off-screen left */
-@keyframes mv-announce{
-  0%   { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
+    /* pause on hover (optional) */
+    .mv-announce-wrap:hover .mv-announce-track{ animation-play-state: paused; }
+    
+    
+    /* accessibility */
+    @media (prefers-reduced-motion: reduce){
+      .mv-announce-track{ animation: none; }
+    }
+    /* the slide loop: from off-screen right to off-screen left */
+    @keyframes mv-announce{
+      0%   { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    /* small tweak for phones so the box fits visually */
+    @media (max-width:560px){
+      .mv-announce-track{ font-size:.9rem; line-height:1.2; }
+    }
 
 
-
-    /* ASCII: neon scanlines + flicker */
+      /* ASCII: neon scanlines + flicker */
     .mv-ascii{
       position: relative;
       white-space: pre;
@@ -167,15 +140,16 @@ html, body { overflow-x: hidden; }
       <div class="mv-strip">SYSTEM ERROR // GRITTY CYBERGRUNGE DETECTED</div>
       <h1 class="mv-title" data-text="MARTA vEGA">MARTA vEGA</h1>
       <p class="mv-sub">MUSICIAN • artist • performer <span class="mv-blink">█</span></p>
+      
+      <div class="mv-announce-wrap" aria-hidden="true">
+        <pre class="mv-ascii mv-announce-track">
+          +---------------------------------------------------------------------+
+          |  node: MARTA VEGA  ::  MUSICIAN + CYBER GRIT MAKER                  |
+          |  bio: welcome to my saturated, distorted feelings                   |
+          +---------------------------------------------------------------------+
+        </pre>
+      </div>
 
-<div class="mv-announce-wrap" aria-hidden="true">
-  <pre class="mv-ascii mv-announce-track">
-+---------------------------------------------------------------------+
-|  node: MARTA VEGA  ::  MUSICIAN + CYBER GRIT MAKER                  |
-|  bio: welcome to my saturated, distorted feelings                   |
-+---------------------------------------------------------------------+
-  </pre>
-</div>
 
       <!-- Single image only (your base64) -->
       <div class="logo-wrap">
