@@ -55,7 +55,7 @@
       background:
         radial-gradient(120% 90% at 20% 10%, rgba(255,0,242,.20), transparent 55%),
         radial-gradient(120% 120% at 80% 60%, rgba(0,255,255,.18), transparent 60%),
-        url('martavega1.jpg') center/cover no-repeat; /* use your file here */
+        url('martavega1-1600.webp') center/cover no-repeat; /* lighter hero bg */
       filter:contrast(105%) saturate(110%);
       transform:scale(1.04);
     }
@@ -137,7 +137,7 @@
     }
     .mv-topnav a:hover{ background:var(--mv-cyan); color:#000; }
 
-    /* anchor hit targets sit below sticky nav */
+    /* anchor hit targets */
     section, .mv-header, #links, #signup, #listen { scroll-margin-top:72px; }
 
     /* HEADER */
@@ -151,7 +151,7 @@
     @keyframes mv-g2{0%{transform:translate(2px,1px)}50%{transform:translate(4px,-2px)}100%{transform:translate(2px,1px)}}
     .mv-sub{color:var(--mv-green); font-size:1rem; letter-spacing:.08em; margin:0 0 .75rem; opacity:.95; font-weight:bold;}
 
-    /* --- Mobile polish & overflow fixes --- */
+    /* Mobile polish */
     html, body { overflow-x:hidden; }
     .container{
       padding-left:max(12px, env(safe-area-inset-left));
@@ -161,9 +161,20 @@
     }
     .mv-strip{white-space:normal; word-break:break-word; line-height:1.1;}
     .mv-ascii{white-space:pre; overflow-x:auto; -webkit-overflow-scrolling:touch;}
-    .logo img{ max-height:55vh; object-fit:contain; }
 
-    /* ASCII: neon scanlines + flicker */
+    /* Blur-up helper for the header photo */
+    .blur-up{
+      filter: blur(12px);
+      transform: scale(1.02);
+      transition: filter .6s ease, transform .6s ease;
+      width:100%; height:auto; display:block;
+    }
+    .blur-up.is-loaded{
+      filter: blur(0);
+      transform: scale(1);
+    }
+
+    /* ASCII: neon + flicker */
     .mv-ascii{
       position:relative; white-space:pre; font-size:.95rem; line-height:1.25; color:var(--mv-cyan);
       margin:.6rem 0 0;
@@ -181,18 +192,12 @@
     @keyframes mv-ascii-flicker{0%,100%{opacity:.98}10%{opacity:.90}11%{opacity:.60}12%{opacity:.98}55%{opacity:.94}56%{opacity:.70}57%{opacity:.98}}
     @keyframes mv-scan{0%{opacity:.25;transform:translateY(-2%)}50%{opacity:.45;transform:translateY(2%)}100%{opacity:.25;transform:translateY(-2%)}}
 
-    /* === About "announcement" marquee === */
+    /* About marquee */
     .about-marquee { position:relative; overflow:hidden; margin:1rem 0 1.5rem; -webkit-overflow-scrolling:touch; }
     .mv-marquee-track { display:flex; width:max-content; gap:2rem; animation:mv-marquee 18s linear infinite; }
     .about-marquee .mv-ascii { display:inline-block; margin:0; white-space:pre; padding-inline:.5rem; }
     @keyframes mv-marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
     @media (prefers-reduced-motion: reduce){ .mv-marquee-track{ animation:none } }
-
-    /* SINGLE LOGO IMAGE */
-    .logo-wrap{display:flex; justify-content:center; margin:1rem 0 1.25rem;}
-    .logo{width:min(640px,90vw);}
-    .logo img{ width:100%; height:auto; display:block; filter:contrast(115%) saturate(115%); animation:logoFloat 4s ease-in-out infinite; }
-    @keyframes logoFloat{ 0%{transform:translateY(0) rotate(-.3deg)} 50%{transform:translateY(-6px) rotate(.3deg)} 100%{transform:translateY(0) rotate(-.3deg)} }
 
     /* sections */
     section{margin:2.2rem 0;}
@@ -206,7 +211,7 @@
       box-shadow:0 0 14px var(--mv-cyan); opacity:.85;
     }
 
-    /* video */
+    /* media blocks */
     .video{position:relative; width:100%; max-width:860px; margin:0 auto; aspect-ratio:16/9; border:1px solid var(--mv-cyan); box-shadow:0 0 12px #003333;}
     .video iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
 
@@ -216,7 +221,7 @@
     .shows a{color:var(--mv-cyan); text-decoration:none; border-bottom:1px dashed var(--mv-cyan);}
     .shows a:hover{color:#000; background:var(--mv-cyan);}
 
-    /* links at end */
+    /* links */
     nav.links{display:grid; gap:.75rem; justify-content:center; margin:2.5rem 0 2rem;}
     nav.links a{
       display:block; padding:.8rem 1rem; color:var(--mv-cyan); text-decoration:none; font-weight:700;
@@ -227,11 +232,12 @@
     nav.links a:hover::before{color:var(--mv-fg); transform:translate(-2px,-1px);}
     nav.links a:hover::after{color:var(--mv-green); transform:translate(2px,1px);}
 
-    /* SIGNUP block */
+    /* SIGNUP */
     .signup{
       max-width:640px; margin:0 auto; border:1px solid var(--mv-cyan);
       padding:1rem; box-shadow:0 0 12px rgba(0,255,255,.25);
       background:rgba(0,255,255,.03);
+      text-align:center;
     }
     .signup form{display:flex; gap:.5rem; flex-wrap:wrap; justify-content:center;}
     .signup input[type="email"]{
@@ -249,12 +255,10 @@
 </head>
 <body>
 
-  <!-- INTRO HERO (before nav for full impact) -->
+  <!-- INTRO HERO -->
   <section id="intro-hero" aria-label="Intro hero">
     <div class="hero-bg"></div>
-
     <h1 class="hero-title" data-text="MARTA vEGA">MARTA vEGA</h1>
-
     <div class="hero-ticker" aria-hidden="true">
       <div class="ticker-track">
         <span>LESBIAN GRUNGE SOUL • CYBER GRIT MAKER • RAW + CINEMATIC • </span>
@@ -262,7 +266,6 @@
         <span>LESBIAN GRUNGE SOUL • CYBER GRIT MAKER • RAW + CINEMATIC • </span>
       </div>
     </div>
-
     <button class="scroll-hint" aria-label="Scroll to content" onclick="document.querySelector('.container').scrollIntoView({behavior:'smooth'})">
       scroll
       <svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 16l-6-6h12z" fill="currentColor"/></svg>
@@ -293,15 +296,25 @@
 +---------------------------------------------------------------------+
 </pre>
 
-      <!-- Single image only -->
+      <!-- First image after the heading — blur-up + responsive WebP -->
       <div class="logo-wrap">
         <div class="logo">
-          <img src="martavega1.jpg" alt="MARTA vEGA — martavega1" />
+          <img
+            id="mv-photo"
+            class="blur-up"
+            src="martavega1-blur.webp"
+            alt="MARTA vEGA — portrait"
+            data-src-small="martavega1-640.webp"
+            data-src-med="martavega1-960.webp"
+            data-src-large="martavega1-1280.webp"
+            data-src-xl="martavega1-1600.webp"
+            data-fallback="martavega1.jpg"
+          />
         </div>
       </div>
     </header>
 
-    <!-- ABOUT marquee + image -->
+    <!-- ABOUT -->
     <section id="about">
       <div class="about-marquee" aria-label="About announcement scrolling">
         <div class="mv-marquee-track">
@@ -379,7 +392,7 @@
     </section>
 
     <!-- SIGNUP -->
-    <section id="signup" class="signup" style="text-align:center; margin:3rem auto;">
+    <section id="signup" class="signup" style="margin:3rem auto;">
       <h2>Subscribe</h2>
       <p style="margin-bottom:1rem; color:var(--mv-green); font-weight:bold;">
         join Marta Vega’s distorted world — get updates straight to your inbox
@@ -402,7 +415,7 @@
     <footer>© 2025 Marta Vega</footer>
   </div>
 
-  <!-- Tiny JS: split the intro headline into staggered chars -->
+  <!-- Headline char animation -->
   <script>
     (function(){
       var t = document.querySelector('.hero-title');
@@ -415,6 +428,40 @@
         span.textContent = c === ' ' ? '\u00A0' : c;
         span.style.animationDelay = (i * 40) + 'ms';
         t.appendChild(span);
+      });
+    })();
+
+    // Blur-up swap for the header image
+    (function(){
+      const img = document.getElementById('mv-photo');
+      if(!img) return;
+
+      function pickSrc(){
+        const w = window.innerWidth || 1200;
+        if (w >= 1200) return img.dataset.srcXl;
+        if (w >= 992)  return img.dataset.srcLarge;
+        if (w >= 768)  return img.dataset.srcMed;
+        return img.dataset.srcSmall;
+      }
+
+      const hi = new Image();
+      hi.onload = function(){
+        // swap in the sharp image and remove blur
+        img.src = hi.src;
+        img.classList.add('is-loaded');
+      };
+      hi.onerror = function(){
+        // fallback to JPEG if something goes wrong
+        hi.src = img.dataset.fallback;
+      };
+      hi.src = pickSrc();
+
+      // If user rotates/resizes before load, pick a better size
+      window.addEventListener('resize', function(){
+        if (!img.classList.contains('is-loaded')) {
+          const candidate = pickSrc();
+          if (candidate !== hi.src) { hi.src = candidate; }
+        }
       });
     })();
   </script>
