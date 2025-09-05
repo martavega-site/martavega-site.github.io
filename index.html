@@ -42,6 +42,39 @@
     html,body{background:var(--bg); color:var(--text); margin:0; font-family:"Courier New", ui-monospace, Menlo, Consolas, monospace;}
     html{scroll-behavior:smooth;}
     .container{max-width:1000px; margin:0 auto; padding:16px;}
+    
+    /* ===== Lazy Embed Styles (Spotify/YouTube/Bandsintown) ===== */
+    .lazy-embed {
+      position: relative;
+      width: 100%;
+      max-width: 860px;
+      margin: 0 auto;
+      aspect-ratio: 16/9;
+      border: 1px solid var(--mv-cyan);
+      box-shadow: 0 0 12px #003333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,.6);
+    }
+    
+    .lazy-btn {
+      padding: 0.8rem 1.2rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: .12em;
+      color: var(--mv-cyan);
+      background: transparent;
+      border: 1px solid var(--mv-cyan);
+      cursor: pointer;
+      transition: all .25s ease;
+    }
+    .lazy-btn:hover {
+      background: var(--mv-cyan);
+      color: #000;
+    }
+
 
     /* ===== INTRO HERO (optimized LCP) ===== */
     #intro-hero{
@@ -373,48 +406,29 @@
     <!-- LISTEN (Spotify) -->
     <section id="listen" aria-label="Listen on Spotify">
       <h2>Listen</h2>
-      <div class="video" style="max-width:860px;">
-        <iframe
-          title="Marta Vega — Spotify embedded player"
-          style="border-radius:0"
-          src="https://open.spotify.com/embed/artist/7KtHuw3e8j6LnA4PIHyhAr?utm_source=generator&theme=0"
-          width="100%" height="100%" frameborder="0"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy">
-        </iframe>
+      <div class="video lazy-embed" data-embed="spotify">
+        <button class="lazy-btn" aria-label="Play Spotify embed">▶ Listen on Spotify</button>
       </div>
     </section>
 
+
     <!-- MUSIC VIDEO -->
-    <section id="video" aria-label="Music Video">
+    <section id="video" aria-label="Music Video"> 
       <h2>Music Video</h2>
-      <div class="video">
-        <iframe
-          src="https://www.youtube.com/embed/CtoSWjgRucw"
-          title="Marta Vega — Music Video on YouTube"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          loading="lazy"
-          allowfullscreen>
-        </iframe>
+      <div class="video lazy-embed" data-embed="youtube">
+        <button class="lazy-btn" aria-label="Play Music Video">▶ Watch Video</button>
       </div>
     </section>
+
 
     <!-- SHOWS -->
     <section id="shows" class="shows" aria-label="Upcoming shows">
       <h2>Upcoming Shows</h2>
-      <a class="bit-widget-initializer"
-         data-artist-name="Marta Vega"
-         data-display-local-dates="false"
-         data-display-past-dates="false"
-         data-auto-style="true"
-         data-text-color="#00ffff"
-         data-link-color="#ff00f2"
-         data-background-color="transparent"
-         href="https://www.bandsintown.com/a/15610340-marta-vega">
-         Marta Vega Tour Dates
-      </a>
-      <script charset="utf-8" src="https://widget.bandsintown.com/main.min.js"></script>
+      <div class="lazy-embed" data-embed="bandsintown">
+        <button class="lazy-btn" aria-label="Load tour dates">▶ View Tour Dates</button>
+      </div>
     </section>
+
 
     <!-- SIGNUP -->
     <section id="signup" class="signup" style="text-align:center; margin:3rem auto;">
@@ -442,19 +456,37 @@
 
   <!-- Tiny JS: split the intro headline into staggered chars -->
   <script>
-    (function(){
-      var t = document.querySelector('.hero-title');
-      if(!t) return;
-      var txt = t.textContent.trim();
-      t.textContent = '';
-      txt.split('').forEach(function(c, i){
-        var span = document.createElement('span');
-        span.className = 'ch';
-        span.textContent = c === ' ' ? '\u00A0' : c;
-        span.style.animationDelay = (i * 40) + 'ms';
-        t.appendChild(span);
+    document.querySelectorAll('.lazy-embed').forEach(wrapper => {
+      const btn = wrapper.querySelector('.lazy-btn');
+      btn.addEventListener('click', () => {
+        let iframe = document.createElement('iframe');
+        iframe.width = "100%";
+        iframe.height = "100%";
+        iframe.frameBorder = "0";
+        iframe.loading = "lazy";
+        
+        if (wrapper.dataset.embed === "spotify") {
+          iframe.src = "https://open.spotify.com/embed/artist/7KtHuw3e8j6LnA4PIHyhAr?utm_source=generator&theme=0";
+          iframe.title = "Marta Vega — Spotify Player";
+          iframe.allow = "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
+        }
+        
+        if (wrapper.dataset.embed === "youtube") {
+          iframe.src = "https://www.youtube.com/embed/CtoSWjgRucw";
+          iframe.title = "Marta Vega — Music Video on YouTube";
+          iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        }
+        
+        if (wrapper.dataset.embed === "bandsintown") {
+          iframe.src = "https://widget.bandsintown.com/main.min.js"; // loads widget
+          iframe.title = "Marta Vega — Tour Dates";
+        }
+        
+        wrapper.innerHTML = "";
+        wrapper.appendChild(iframe);
       });
-    })();
+    });
   </script>
+  
 </body>
 </html>
