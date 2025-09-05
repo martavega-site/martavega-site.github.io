@@ -114,6 +114,42 @@
     @keyframes mv-ascii-flicker{0%,100%{opacity:.98}10%{opacity:.90}11%{opacity:.60}12%{opacity:.98}55%{opacity:.94}56%{opacity:.70}57%{opacity:.98}}
     @keyframes mv-scan{0%{opacity:.25;transform:translateY(-2%)}50%{opacity:.45;transform:translateY(2%)}100%{opacity:.25;transform:translateY(-2%)}}
 
+    /* === About "announcement" marquee === */
+.about-marquee {
+  position: relative;
+  overflow: hidden;
+  margin: 1rem 0 1.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* The moving strip */
+.mv-marquee-track {
+  display: flex;
+  width: max-content;            /* shrink-wrap to content so we can animate */
+  gap: 2rem;                     /* space between the two copies */
+  animation: mv-marquee 18s linear infinite;
+}
+
+/* Reuse your neon ASCII styling but ensure inline layout for scrolling */
+.about-marquee .mv-ascii {
+  display: inline-block;         /* sit side-by-side for the loop */
+  margin: 0;                     /* remove extra margins inside the strip */
+  white-space: pre;              /* keep the ASCII aligned */
+  padding-inline: .5rem;         /* tiny breathing room at edges */
+}
+
+/* Smooth, infinite scroll */
+@keyframes mv-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); } /* shift by half because we have 2 copies */
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .mv-marquee-track { animation: none; }
+}
+
+
     /* SINGLE LOGO IMAGE (no extra layers) */
     .logo-wrap{display:flex; justify-content:center; margin:1rem 0 1.25rem;}
     .logo{width:min(640px,90vw);}
@@ -221,41 +257,10 @@
     </header>
 
 
-    <!-- ABOUT -->
-<section id="about" style="margin:3rem 0;">
-  <div style="
-    border:2px solid var(--mv-fg);
-    padding:1.5rem;
-    background:#000;
-    color:var(--text);
-    box-shadow:0 0 24px var(--mv-fg), inset 0 0 18px #220022;
-    max-width:850px;
-    margin:0 auto;
-    font-size:1rem;
-    line-height:1.5;
-    text-align:left;
-    position:relative;
-  ">
-    <!-- Red strip like system error -->
-    <div style="
-      position:absolute;
-      top:-2px;
-      left:-2px;
-      right:-2px;
-      background:var(--mv-error);
-      color:#000;
-      font-weight:700;
-      padding:.4rem .75rem;
-      text-transform:uppercase;
-      letter-spacing:.1em;
-      border-bottom:2px solid var(--mv-fg);
-      font-size:.9rem;
-    ">
-      SYSTEM ANNOUNCEMENT // ABOUT MARTA VEGA
-    </div>
-
-    <section id="about">
-<pre class="mv-ascii">
+   <section id="about">
+  <div class="about-marquee" aria-label="About announcement scrolling">
+    <div class="mv-marquee-track">
+      <pre class="mv-ascii">
 +----------------------------------------------------------------------------+
 |  ABOUT: MARTA VEGA — ITALIAN-BORN, LONDON-BASED MUSICIAN                   |
 |                                                                            |
@@ -269,14 +274,34 @@
 |  This is not just music. This is resistance, distortion, and cyber-grit     |
 |  soul.                                                                      |
 +----------------------------------------------------------------------------+
-</pre>
+      </pre>
 
-<div class="logo-wrap">
-  <div class="logo">
-    <img src="https://images.squarespace-cdn.com/content/v1/56e6c21027d4bdfdac8a607c/1739951034631-ZPV1J9QAGW5Y4ULM2EK2/OXYGEN_ONLINE.00_01_59_18.Still013.png?format=1000w"
-         alt="Marta Vega — lesbian grunge soul musician in London" />
+      <!-- duplicate for seamless loop -->
+      <pre class="mv-ascii" aria-hidden="true">
++----------------------------------------------------------------------------+
+|  ABOUT: MARTA VEGA — ITALIAN-BORN, LONDON-BASED MUSICIAN                   |
+|                                                                            |
+|  Marta Vega is shaping the sound of “lesbian grunge soul.”                  |
+|  Demo-first-take vocals, fuzzy guitars, and cinematic grit collide          |
+|  into raw, distorted emotion.                                               |
+|                                                                            |
+|  Both manifesto and music, Marta Vega turns saturated feelings into sound—  |
+|  streaming worldwide and rooted in the London music scene.                  |
+|                                                                            |
+|  This is not just music. This is resistance, distortion, and cyber-grit     |
+|  soul.                                                                      |
++----------------------------------------------------------------------------+
+      </pre>
+    </div>
   </div>
-</div>
+
+  <div class="logo-wrap">
+    <div class="logo">
+      <img
+        src="https://images.squarespace-cdn.com/content/v1/56e6c21027d4bdfdac8a607c/1739951034631-ZPV1J9QAGW5Y4ULM2EK2/OXYGEN_ONLINE.00_01_59_18.Still013.png?format=1000w"
+        alt="Marta Vega — lesbian grunge soul musician in London" />
+    </div>
+  </div>
 </section>
 
 
