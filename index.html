@@ -3,6 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11387360503"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-11387360503');
+</script>
 
   <!-- SEO Title & Description -->
   <title>Marta Vega — Musician | Lesbian Grunge Soul</title>
@@ -458,4 +466,19 @@
   </script>
 </body>
 </html>
+
+<!-- Google Ads conversion tracking for Subscribe form -->
+<script>
+  // Track Formspree form submissions
+  document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector('form[action*="formspree"]');
+    if (form) {
+      form.addEventListener("submit", function() {
+        gtag('event', 'conversion', {
+          'send_to': 'AW-11387360503/Zh_XCMqHx7sbEPep9bUq'
+        });
+      });
+    }
+  });
+</script>
 
